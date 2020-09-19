@@ -88,48 +88,47 @@ try:
     print("Face keypoints: \n" + str(datum.faceKeypoints[0]))
     print("Left hand keypoints: \n" + str(datum.handKeypoints[0][0]))
     print("Right hand keypoints: \n" + str(datum.handKeypoints[1][0]))
+    pose = datum.poseKeypoints[0]
+    face = datum.faceKeypoints[0]
+    lHand = datum.handKeypoints[0][0]
+    rHand = datum.handKeypoints[1][0]
+
+    for i in range(len(face)):       #얼굴
+        faceX.append(face[i][0])
+        faceY.append(face[i][1])
+        faceConf.append(face[i][2])
+    for i in range(len(lHand)):      #왼손
+        lHandX.append(lHand[i][0])
+        lHandY.append(lHand[i][1])
+        lHandConf.append(lHand[i][2])
+    for i in range(len(rHand)):      #오른손
+        rHandX.append(rHand[i][0])
+        rHandY.append(rHand[i][1])
+        rHandConf.append(rHand[i][2])
+    for i in ['0', '1', '2', '3', '4', '5', '6', '7', '14', '15', '16', '17']:      #body 몸
+        poseX.append(pose[i][0])
+        poseY.append(pose[i][1])
+        poseConf.append(pose[i][2])
+
+    rHandX = np.asarray(rHandX)
+    rHandY = np.asarray(rHandY)
+    rHandConf = np.asarray(rHandConf)
+    lHandX = np.asarray(lHandX)
+    lHandY = np.asarray(lHandY)
+    lHandConf = np.asarray(lHandConf)
+
+    poseX = np.asarray(poseX)
+    poseY = np.asarray(poseY)
+    poseConf = np.asarray(poseConf)
+
+    faceX = np.asarray(faceX)
+    faceY = np.asarray(faceY)
+    faceConf = np.asarray(faceConf)
+
+    res = np.concatenate([lHandX, lHandY, rHandX, rHandY, faceX, faceY, poseX, poseY])
+    print(res)
     cv2.imshow("OpenPose 1.6.0 - Tutorial Python API", datum.cvOutputData)
     cv2.waitKey(0)
 except Exception as e:
     print(e)
     sys.exit(-1)
-
-pose = datum.poseKeypoints[0]
-face = datum.faceKeypoints[0]
-lHand = datum.handKeypoints[0][0]
-rHand = datum.handKeypoints[1][0]
-
-for i in range(len(face)):       #얼굴
-    faceX.append(face[i][0])
-    faceY.append(face[i][1])
-    faceConf.append(face[i][2])
-for i in range(len(lHand)):      #왼손
-    lHandX.append(lHand[i][0])
-    lHandY.append(lHand[i][1])
-    lHandConf.append(lHand[i][2])
-for i in range(len(rHand)):      #오른손
-    rHandX.append(rHand[i][0])
-    rHandY.append(rHand[i][1])
-    rHandConf.append(rHand[i][2])
-for i in ['0', '1', '2', '3', '4', '5', '6', '7', '14', '15', '16', '17']:      #body 몸
-    poseX.append(pose[i][0])
-    poseY.append(pose[i][1])
-    poseConf.append(pose[i][2])
-
-rHandX = np.asarray(rHandX)
-rHandY = np.asarray(rHandY)
-rHandConf = np.asarray(rHandConf)
-lHandX = np.asarray(lHandX)
-lHandY = np.asarray(lHandY)
-lHandConf = np.asarray(lHandConf)
-
-poseX = np.asarray(poseX)
-poseY = np.asarray(poseY)
-poseConf = np.asarray(poseConf)
-
-faceX = np.asarray(faceX)
-faceY = np.asarray(faceY)
-faceConf = np.asarray(faceConf)
-
-res = np.concatenate([lHandX, lHandY, rHandX, rHandY, faceX, faceY, poseX, poseY])
-print(res)
