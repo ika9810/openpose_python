@@ -65,8 +65,8 @@ try:
     opWrapper.emplaceAndPop([datum])
 
     # Display Image
-    print("Body keypoints: \n" + str(datum.poseKeypoints))
-    print("Face keypoints: \n" + str(datum.faceKeypoints))
+    print("Body keypoints: \n" + str(datum.poseKeypoints[0]))
+    print("Face keypoints: \n" + str(datum.faceKeypoints[0]))
     print("Left hand keypoints: \n" + str(datum.handKeypoints[0]))
     print("Right hand keypoints: \n" + str(datum.handKeypoints[1]))
     cv2.imshow("OpenPose 1.6.0 - Tutorial Python API", datum.cvOutputData)
